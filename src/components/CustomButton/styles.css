@@ -1,0 +1,10 @@
+.button {
+    height: 56px;
+    width: 301px;
+    background: var(--yellow);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    border: none;
+}

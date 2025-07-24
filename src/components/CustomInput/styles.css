@@ -1,0 +1,19 @@
+.input {
+    height: 48px;
+    width: 277px;
+    border-radius: 12px;
+    border-color: var(--white);
+    background-color: var(--violet);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 12px;
+}
+
+.placeholder {
+    margin: 0;
+    font-size: 14px;
+    color: var(--lightGray);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
