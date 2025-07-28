@@ -1,19 +1,34 @@
-.input {
-    height: 48px;
-    width: 277px;
-    border-radius: 12px;
-    border-color: var(--white);
-    background-color: var(--violet);
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 400;
-    padding: 0 12px;
+.custom-input-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.placeholder {
-    margin: 0;
-    font-size: 14px;
-    color: var(--lightGray);
-    font-weight: 400;
-    margin-bottom: 8px;
+.custom-input {
+  height: 48px;
+  width: 277px;
+  border-radius: 12px;
+  background-color: var(--violet);
+  border: 1px solid var(--white);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 12px;
+}
+
+.custom-input-label {
+  margin: 0;
+  font-size: 14px;
+  color: var(--lightGray);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.custom-input-icon-container {
+  position: relative;
+  width: 100%;
+}
+.custom-input-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
 }

@@ -1,17 +1,26 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "../../pages/MainPage";
+import SignInPage from "../../pages/SignInPage/index";
 import React from "react";
 import ProtectedRoute from "../ProtectedRoute";
+import SignUpPage from "../../pages/SignUpPage/SignUp";
 
 const AppNavigation = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/login"
           element={
             <ProtectedRoute>
-              <MainPage />
+              <SignInPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            <ProtectedRoute>
+              <SignUpPage />
             </ProtectedRoute>
           }
         />
