@@ -1,17 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosInstance from "../../api/axios";
-import { isAxiosError } from "axios";
-import { AuthState, LoginPayload } from "../../interfaces";
-import { loginRequest } from "../../api/authApi";
-import { log } from "console";
-import { signInAsyncAction } from "../asyncActions/authAsyncActions";
+/** @format */
 
+import { createSlice } from "@reduxjs/toolkit";
+import { AuthState } from "../../interfaces";
 
 const initialState: AuthState = {
-  token: sessionStorage.getItem('token'),
-  isAuthenticated: !!sessionStorage.getItem('token'),
-  loading: false,
-  error: null,
+  accessToken: "",
+  isLoading: false,
+  isError: null,
 };
 
 const authSlice = createSlice({
@@ -19,18 +14,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     getToken: (state) => {
-      state.loading = true;
-      state.error = null;
+      state.isLoading = true;
+      state.isError = null;
     },
     getTokenSuccess: (state, action) => {
-      state.loading = false;
-      state.token = action.payload;
-      state.error = null;
+      state.isLoading = false;
+      state.accessToken = action.payload;
+      state.isError = null;
     },
     getTokenError: (state, action) => {
-      state.loading = false;
-      state.error = action.payload as string;
-      state.token = null;
+      state.isLoading = false;
+      state.isError = action.payload as string;
       sessionStorage.removeItem("token");
     },
   },

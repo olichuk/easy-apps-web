@@ -1,11 +1,10 @@
-export interface AuthState {
-  token: string | null;
-  isAuthenticated: boolean;
-  loading: boolean;
-  error: string | null;
-  accessToken?: string;
-}
+/** @format */
 
+export interface AuthState {
+  isLoading: boolean;
+  isError: string | null;
+  accessToken: string;
+}
 
 export interface LoginPayload {
   email: string;
