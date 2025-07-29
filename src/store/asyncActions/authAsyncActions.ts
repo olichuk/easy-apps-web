@@ -2,12 +2,12 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
-import { signInApi } from "../../api/authApi";
-import { LoginPayload } from "../../interfaces/auth";
+import { signInApi, signUpApi } from "../../api/authApi";
+import { ISignInAsyncAction, ISignUpAsyncAction } from "../../interfaces/auth";
 
 export const signInAsyncAction = createAsyncThunk(
   "auth/signIn",
-  async ({ email, password }: LoginPayload, { rejectWithValue }) => {
+  async ({ email, password }: ISignInAsyncAction, { rejectWithValue }) => {
     try {
       const response = await signInApi(email, password);
       const token = response.data.accessToken;
@@ -22,6 +22,32 @@ export const signInAsyncAction = createAsyncThunk(
       } else {
         return rejectWithValue("An unexpected error occurred");
       }
+    }
+  }
+);
+
+export const signUpAsyncAction = createAsyncThunk(
+  "auth/signUp",
+  async (
+    { email, name, password, avatar }: ISignUpAsyncAction,
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await signUpApi(email, name, password, avatar);
+      const token = response.data.accessToken;
+      return token;
+    } catch (error) {
+      console.log(error);
+      let errorMessage = "An unexpected error occurred";
+      if (isAxiosError(error)) {
+        errorMessage = error.response?.data?.error || "Login failed";
+        errorMessage =
+          error.response?.data?.errors?.join("\n") || "Sign up failed";
+        console.log(error.response);
+      }
+      alert(errorMessage);
+      alert(errorMessage);
+      return rejectWithValue(errorMessage);
     }
   }
 );

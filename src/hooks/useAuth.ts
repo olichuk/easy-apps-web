@@ -1,7 +1,10 @@
 /** @format */
 
 import { useDispatch, useSelector } from "react-redux";
-import { signInAsyncAction } from "../store/asyncActions/authAsyncActions";
+import {
+  signInAsyncAction,
+  signUpAsyncAction,
+} from "../store/asyncActions/authAsyncActions";
 import { TAppDispatch, TRootState } from "../store";
 import { useMemo } from "react";
 
@@ -23,10 +26,20 @@ const useAuth = () => {
     dispatch(signInAsyncAction({ email: email, password: password }));
   };
 
+  const signUp = (
+    email: string,
+    name: string,
+    password: string,
+    avatar?: File
+  ) => {
+    dispatch(signUpAsyncAction({ email, name, password, avatar }));
+  };
+
   return {
     accessToken,
     isLoading,
     signIn,
+    signUp,
     isAuth,
   };
 };
