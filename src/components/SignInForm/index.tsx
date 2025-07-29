@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../CustomInput";
@@ -24,10 +26,14 @@ const SignInForm = () => {
       {({ handleChange, handleSubmit, errors }) => (
         <div className="login-form-container">
           <div className="login-form-inputs-container">
-            <CustomInput label="Email" onChange={handleChange("email")} />
+            <CustomInput
+              label="Email"
+              onChange={handleChange("email")}
+              type="email"
+            />
             {errors.email && <TextError error={errors.email} />}
             <CustomInput
-              typeInput="password"
+              type="password"
               label="Password"
               onChange={handleChange("password")}
             />
