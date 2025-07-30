@@ -3,7 +3,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import SignInPage from "../../pages/SignInPage/index";
 import React from "react";
-import SignUpPage from "../../pages/SignUpPage/SignUp";
+import SignUpPage from "../../pages/SignUpPage/index";
 
 const AppNavigation = () => {
   return (

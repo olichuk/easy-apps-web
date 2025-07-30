@@ -9,9 +9,10 @@ interface IProps {
   type: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isShowPassword?: boolean;
 }
 
-const CustomInput = ({ type, label, onChange }: IProps) => {
+const CustomInput = ({ type, label, onChange, isShowPassword }: IProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const switchVisibility = () => {
     setShowPassword(!showPassword);
@@ -25,7 +26,7 @@ const CustomInput = ({ type, label, onChange }: IProps) => {
         className="custom-input"
         onChange={onChange}
       />
-      {type === "password" && (
+      {type === "password" && isShowPassword && (
         <div className="custom-input-icon-container">
           <img
             className="custom-input-icon"

@@ -1,0 +1,38 @@
+/** @format */
+
+.avatar-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.picker-edit-icon-container {
+  position: relative;
+}
+
+.picker-delete-icon-container {
+  position: relative;
+}
+
+.picker-edit-icon {
+  padding: 3px;
+  background-color: white;
+  border-radius: 100px;
+  border: 1px solid var(--black);
+  bottom: 0px;
+  right: 28px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.picker-delete-icon {
+  padding: 3px;
+  background-color: white;
+  border-radius: 100px;
+  border: 1px solid var(--black);
+  bottom: 0px;
+  left: 28px;
+  position: absolute;
+  cursor: pointer;
+}
