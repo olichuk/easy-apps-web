@@ -6,7 +6,14 @@ export interface AuthState {
   accessToken: string;
 }
 
-export interface LoginPayload {
+export interface ISignInAsyncAction {
   email: string;
   password: string;
+}
+
+export interface ISignUpAsyncAction {
+  email: string;
+  name: string;
+  password: string;
+  avatar?: File;
 }
