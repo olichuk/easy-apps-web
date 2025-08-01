@@ -8,9 +8,11 @@ import "./styles.css";
 import { Formik } from "formik";
 import validationSchema from "../../validation/validationSchemaSignIn";
 import TextError from "../TextError";
+import useAuth from "../../hooks/useAuth";
 
 const SignInForm = () => {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   return (
     <Formik
@@ -20,7 +22,7 @@ const SignInForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        console.log(values);
+        signIn(values.email, values.password);
       }}
     >
       {({ handleChange, handleSubmit, errors }) => (

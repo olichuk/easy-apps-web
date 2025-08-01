@@ -10,7 +10,6 @@ import { useMemo } from "react";
 
 const useAuth = () => {
   const dispatch = useDispatch<TAppDispatch>();
-
   const accessToken = useSelector<TRootState, string | null>(
     (state: TRootState) => state.auth.accessToken
   );

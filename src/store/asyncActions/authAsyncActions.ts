@@ -12,8 +12,6 @@ export const signInAsyncAction = createAsyncThunk(
       const response = await signInApi(email, password);
       const token = response.data.accessToken;
 
-      sessionStorage.setItem("token", token);
-
       return token;
     } catch (error) {
       if (isAxiosError(error)) {
@@ -35,19 +33,15 @@ export const signUpAsyncAction = createAsyncThunk(
     try {
       const response = await signUpApi(email, name, password, avatar);
       const token = response.data.accessToken;
+
       return token;
     } catch (error) {
-      console.log(error);
-      let errorMessage = "An unexpected error occurred";
       if (isAxiosError(error)) {
-        errorMessage = error.response?.data?.error || "Login failed";
-        errorMessage =
-          error.response?.data?.errors?.join("\n") || "Sign up failed";
-        console.log(error.response);
+        const errorMessage = error.response?.data?.message || "Sign up failed";
+        return rejectWithValue(errorMessage);
+      } else {
+        return rejectWithValue("An unexpected error occurred");
       }
-      alert(errorMessage);
-      alert(errorMessage);
-      return rejectWithValue(errorMessage);
     }
   }
 );

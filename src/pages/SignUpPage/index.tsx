@@ -1,10 +1,20 @@
 /** @format */
 
 import SignUpForm from "../../components/SignUpForm";
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAuth();
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/main", { replace: true });
+    }
+  }, [isAuth]);
+
   return (
     <div className="registration-page-container">
       <SignUpForm />

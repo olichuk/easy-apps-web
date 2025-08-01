@@ -9,14 +9,16 @@ import { Formik } from "formik";
 import validationSchemaSignUp from "../../validation/validationSchemaSignUp";
 import TextError from "../TextError";
 import ImagePicker from "../ImagePicker";
+import useAuth from "../../hooks/useAuth";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { signUp } = useAuth();
 
   return (
     <Formik
       initialValues={{
-        avatar: "",
+        avatar: undefined as File | undefined,
         email: "",
         name: "",
         password: "",
@@ -24,12 +26,17 @@ const SignUpForm = () => {
       }}
       validationSchema={validationSchemaSignUp}
       onSubmit={(values) => {
-        console.log(values);
+        signUp(
+          values.email,
+          values.name,
+          values.password,
+          values.avatar as File
+        );
       }}
     >
-      {({ handleChange, handleSubmit, errors }) => (
+      {({ handleChange, handleSubmit, errors, values, setFieldValue }) => (
         <div className="registration-form-container">
-          <ImagePicker />
+          <ImagePicker values={values} setFieldValue={setFieldValue} />
           {errors.avatar && <TextError error={errors.avatar} />}
           <div className="registration-form-inputs-container">
             <CustomInput

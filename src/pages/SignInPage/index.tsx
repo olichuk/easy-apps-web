@@ -1,9 +1,21 @@
+/** @format */
+
 import SignInForm from "../../components/SignInForm";
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/images/logo.svg";
 import "./styles.css";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAuth();
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/main", { replace: true });
+    }
+  }, [isAuth]);
+
   return (
     <div className="login-page-container">
       <img src={logo} alt="Logo" />

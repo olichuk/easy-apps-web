@@ -1,23 +1,29 @@
 /** @format */
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import editIcon from "../../assets/icons/edit-pencil-icon.svg";
 import deleteIcon from "../../assets/icons/trash-can-icon.svg";
 import emptyPhotoImage from "../../assets/images/empty-photo-image.svg";
 import "./styles.css";
 
-const ImagePicker = () => {
-  const [image, setImage] = useState<File | null>(null);
+interface IProps {
+  values: any;
+  setFieldValue?: (field: string, value: any) => void;
+}
+
+const ImagePicker = ({ values, setFieldValue }: IProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const imageUrl = useMemo(() => {
-    return image ? URL.createObjectURL(image) : emptyPhotoImage;
-  }, [image]);
+    return values?.avatar ?
+        URL.createObjectURL(values.avatar)
+      : emptyPhotoImage;
+  }, [values?.avatar]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files?.[0]) {
-      setImage(files[0]);
+      setFieldValue?.("avatar", files[0]);
     }
   };
 
@@ -26,7 +32,7 @@ const ImagePicker = () => {
   };
 
   const handleDeleteClick = () => {
-    setImage(null);
+    setFieldValue?.("avatar", null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -35,14 +41,14 @@ const ImagePicker = () => {
   return (
     <div className="avatar-input-container">
       <input
+        className="avatar-input"
         type="file"
         accept="image/*"
         ref={fileInputRef}
         onChange={handleFileChange}
-        style={{ display: "none" }}
       />
 
-      <img src={imageUrl} alt="Avatar" />
+      <img src={imageUrl} alt="Avatar" className="avatar-preview" />
       <div className="picker-edit-icon-container">
         <img
           className="picker-edit-icon"

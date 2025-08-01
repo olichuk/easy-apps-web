@@ -7,6 +7,18 @@
   padding-bottom: 16px;
 }
 
+.avatar-input {
+  display: none;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
 .picker-edit-icon-container {
   position: relative;
 }
