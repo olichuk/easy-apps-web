@@ -14,12 +14,20 @@ export const signInAsyncAction = createAsyncThunk(
 
       return token;
     } catch (error) {
+      console.log(error);
+      let errorMessage = "An unexpected error occurred";
       if (isAxiosError(error)) {
-        const errorMessage = error.response?.data?.message || "Login failed";
-        return rejectWithValue(errorMessage);
-      } else {
-        return rejectWithValue("An unexpected error occurred");
+        if (error.response?.data?.error) {
+          errorMessage = error.response?.data?.error || "Sign in failed";
+          console.log(error.response);
+        } else if (error.response?.data?.errors) {
+          errorMessage =
+            error.response?.data?.errors.join("\n") || "Sign in failed";
+          console.log(error.response);
+        }
       }
+      alert(errorMessage);
+      return rejectWithValue(errorMessage);
     }
   }
 );
@@ -36,12 +44,20 @@ export const signUpAsyncAction = createAsyncThunk(
 
       return token;
     } catch (error) {
+      console.log(error);
+      let errorMessage = "An unexpected error occurred";
       if (isAxiosError(error)) {
-        const errorMessage = error.response?.data?.message || "Sign up failed";
-        return rejectWithValue(errorMessage);
-      } else {
-        return rejectWithValue("An unexpected error occurred");
+        if (error.response?.data?.error) {
+          errorMessage = error.response?.data?.error || "Sign up failed";
+          console.log(error.response);
+        } else if (error.response?.data?.errors) {
+          errorMessage =
+            error.response?.data?.errors.join("\n") || "Sign up failed";
+          console.log(error.response);
+        }
       }
+      alert(errorMessage);
+      return rejectWithValue(errorMessage);
     }
   }
 );
