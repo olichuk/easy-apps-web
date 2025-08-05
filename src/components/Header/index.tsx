@@ -1,0 +1,49 @@
+import React from "react";
+import "./styles.css";
+import CustomButton from "../CustomButton";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../assets/images/logo.svg";
+import { useLocation } from "react-router-dom";
+
+const Header = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
+  return (
+    <header className="header">
+      <Link to="/tasks" className="logo-link">
+        <img src={Logo} alt="Logo" className="logo" />
+      </Link>
+      <div>
+        {currentPath === "/tasks" && (
+          <div className="header-title-container">
+            <div className="header-counter-container">
+              <p className="header-counter-title">You Have </p>
+              <p className="header-counter-title">{"count"} tasks here</p>
+            </div>
+            <CustomButton
+              text="+ Add Task"
+              onClick={() => navigate("/tasks/add")}
+            />
+          </div>
+        )}
+        {currentPath === "/profile" && (
+          <h1 className="header-title">Profile</h1>
+        )}
+        {currentPath === "/common-tasks" && (
+          <h1 className="header-title">Common Tasks</h1>
+        )}
+      </div>
+      <div className="buttons-container">
+        <CustomButton text="Tasks" onClick={() => navigate("/tasks")} />
+        <CustomButton text="Profile" onClick={() => navigate("/profile")} />
+        <CustomButton
+          text="Common Tasks"
+          onClick={() => navigate("/common-tasks")}
+        />
+      </div>
+    </header>
+  );
+};
+
+export default Header;

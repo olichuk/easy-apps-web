@@ -1,0 +1,39 @@
+.footer {
+  background-color: var(--white);
+  height: 70px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20%;
+}
+
+.nav-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-link-active {
+  color: var(--yellow);
+  text-decoration: underline;
+}
+
+.icon {
+  color: aqua;
+  fill: var(--white);
+}
+
+@media screen and (min-width: 992px) {
+  .footer {
+    display: none;
+  }
+}
