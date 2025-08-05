@@ -12,7 +12,7 @@ const SignInPage = () => {
   const { isAuth } = useAuth();
   useEffect(() => {
     if (isAuth) {
-      navigate("/main", { replace: true });
+      navigate("/tasks", { replace: true });
     }
   }, [isAuth]);
 

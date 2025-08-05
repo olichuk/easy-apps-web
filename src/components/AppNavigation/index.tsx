@@ -4,8 +4,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import SignInPage from "../../pages/SignInPage/index";
 import React from "react";
 import SignUpPage from "../../pages/SignUpPage/index";
+// import ProtectedRoute from "../ProtectedRoute";
+import TasksPage from "../../pages/TasksPage";
+import ProtectedLayout from "../ProtectedLayout";
+import CommonTasksPage from "../../pages/CommonTasksPage/CommonTasksPage";
+import CurrentUserPage from "../../pages/CurrentUserPage/CurrentUserPage";
 import ProtectedRoute from "../ProtectedRoute";
-import MainPage from "../../pages/MainPage";
 
 const AppNavigation = () => {
   return (
@@ -16,13 +20,16 @@ const AppNavigation = () => {
         <Route path="*" element={<Navigate to="/login" />} />
 
         <Route
-          path="/main"
           element={
             <ProtectedRoute>
-              <MainPage />
+              <ProtectedLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/profile" element={<CurrentUserPage />} />
+          <Route path="/common-tasks" element={<CommonTasksPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
