@@ -9,7 +9,7 @@ interface IProps {
   type: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: any;
+  value?: string;
   isShowPassword?: boolean;
   disabled?: boolean;
 }
