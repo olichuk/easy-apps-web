@@ -14,7 +14,7 @@ const Header = () => {
       <Link to="/tasks" className="logo-link">
         <img src={Logo} alt="Logo" className="logo" />
       </Link>
-      <div>
+      <div className="title-container">
         {currentPath === "/tasks" && (
           <div className="header-title-container">
             <div className="header-counter-container">

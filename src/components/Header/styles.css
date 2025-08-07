@@ -1,11 +1,15 @@
 .header {
   background-color: var(--violet);
   height: 145px;
-  display: none;
+  display: flex;
   border-radius: 0 0 28px 28px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+}
+
+.logo-link {
+  display: none;
 }
 
 .header .logo {
@@ -24,9 +28,14 @@
 }
 
 .buttons-container {
-  display: flex;
+  display: none;
   margin-right: 20px;
   gap: 20px;
+}
+
+.title-container {
+  color: var(--white);
+
 }
 
 .header-title-container {
@@ -34,6 +43,7 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  
 }
 
 .header-counter-title {
@@ -50,7 +60,13 @@
 }
 
 @media screen and (min-width: 992px) {
-  .header {
+  .header{
+    justify-content: space-between ;
+  }
+  .logo-link {
+    display: block;
+  }
+  .buttons-container{
     display: flex;
   }
 }
