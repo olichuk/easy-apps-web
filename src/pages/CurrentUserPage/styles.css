@@ -1,0 +1,5 @@
+.current-user-page {
+  background-color: var(--lightGray);
+  height: 100vh;
+  margin: 0;
+}

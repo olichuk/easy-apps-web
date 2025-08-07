@@ -15,10 +15,14 @@ const ImagePicker = ({ values, setFieldValue }: IProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const imageUrl = useMemo(() => {
-    return values?.avatar ?
-        URL.createObjectURL(values.avatar)
-      : emptyPhotoImage;
-  }, [values?.avatar]);
+    if (values?.avatar) {
+      return URL.createObjectURL(values.avatar);
+    }
+    if (values?.avatarPreview) {
+      return values.avatarPreview;
+    }
+    return emptyPhotoImage;
+  }, [values?.avatar, values?.avatarPreview]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -33,6 +37,7 @@ const ImagePicker = ({ values, setFieldValue }: IProps) => {
 
   const handleDeleteClick = () => {
     setFieldValue?.("avatar", null);
+    setFieldValue?.("avatarPreview", "");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
