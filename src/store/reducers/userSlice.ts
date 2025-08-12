@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProfileThunk } from "../asyncActions/getProfileThunk";
+import { logoutThunk } from "../asyncActions/logoutThunk";
 
 type UserProfile = {
   email: string;
@@ -20,7 +21,14 @@ const initialState: {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.data = null;
+      state.error = null;
+      state.loading = false;
+  },
+},
+
   extraReducers: (builder) => {
     builder
       .addCase(getProfileThunk.pending, (state) => {
@@ -34,8 +42,14 @@ const userSlice = createSlice({
       .addCase(getProfileThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.data = null;
+        state.error = null;
+        state.loading = false;
       });
   },
 });
 
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;
