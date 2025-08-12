@@ -1,0 +1,41 @@
+.attachments-container {
+  width: 100%;
+  margin: 16px 0;
+}
+.attachments-horizontal-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+.add-attachment-fixed {
+  flex-shrink: 0; /* Не дозволяє кнопці зменшуватись */
+}
+.attachments-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+  max-width: 200px; /* Обмежуємо ширину - покаже ~2.5 фото */
+  width: 100%;
+
+  /* Стилі для скролбару */
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 transparent;
+}
+.attachments-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.attachments-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.attachments-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 3px;
+}
+.attachment-item-wrapper {
+  flex-shrink: 0;
+}

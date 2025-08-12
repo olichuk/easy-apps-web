@@ -9,9 +9,10 @@ interface IProps {
   id: string;
   title: string;
   done: boolean;
+  deleteTask: (id: string) => void;
 }
 
-const TaskContainer = ({ id, title, done }: IProps) => {
+const TaskContainer = ({ id, title, done, deleteTask }: IProps) => {
   const [isDone, setIsDone] = useState(done);
   const navigate = useNavigate();
   const handleCheckboxClick = () => {
@@ -28,6 +29,7 @@ const TaskContainer = ({ id, title, done }: IProps) => {
   const handleDeleteClick = () => {
     if (window.confirm("Are you sure?")) {
       console.log(`Delete task ${id}`);
+      deleteTask(id);
     }
   };
 

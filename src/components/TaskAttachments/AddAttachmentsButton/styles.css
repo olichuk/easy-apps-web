@@ -1,0 +1,16 @@
+.add-attachment-button {
+  width: 82px;
+  height: 82px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--yellow);
+  margin-right: 12px;
+  margin-top: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}

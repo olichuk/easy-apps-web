@@ -1,0 +1,28 @@
+.add-task-form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 70px;
+}
+
+.add-task-form-inputs .custom-input {
+  background-color: var(--lightGray);
+  border-color: var(--darkGray);
+  color: var(--black);
+  width: 276px;
+}
+.add-task-form-inputs .custom-input-label {
+  color: var(--darkGray);
+}
+.add-task-form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

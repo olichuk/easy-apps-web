@@ -4,7 +4,7 @@ import TaskContainer from "../../components/TaskContainer";
 import useTasks from "../../hooks/useTasks";
 
 const TasksPage = () => {
-  const { tasks, loading, error, getAllTasks } = useTasks();
+  const { tasks, loading, error, getAllTasks, deleteTask } = useTasks();
 
   useEffect(() => {
     getAllTasks();
@@ -29,25 +29,12 @@ const TasksPage = () => {
                 id={task.id}
                 title={task.title}
                 done={task.done}
+                deleteTask={deleteTask}
               />
             ))
           )}
         </div>
       )}
-
-      {/* <TaskContainer id="1" title="Sample Task" done={false} />
-      <TaskContainer id="2" title="Sample Task" done={false} />
-      <TaskContainer id="3" title="Sample Task" done={false} />
-      <TaskContainer id="4" title="Sample Task" done={false} />
-      <TaskContainer id="5" title="Sample Task" done={false} />
-      <TaskContainer id="6" title="Sample Task" done={false} />
-      <TaskContainer id="7" title="Sample Task" done={false} />
-      <TaskContainer id="8" title="Sample Task" done={false} />
-      <TaskContainer id="9" title="Sample Task" done={false} />
-      <TaskContainer id="10" title="Sample Task" done={false} />
-      <TaskContainer id="11" title="Sample Task" done={false} />
-      <TaskContainer id="12" title="Sample Task" done={false} />
-      <TaskContainer id="13" title="Sample Task" done={false} /> */}
     </div>
   );
 };

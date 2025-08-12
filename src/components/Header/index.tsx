@@ -43,6 +43,9 @@ const Header = () => {
         {currentPath === "/common-tasks" && (
           <h1 className="header-title">Common Tasks</h1>
         )}
+        {currentPath === "/tasks/add" && (
+          <h1 className="header-title">Add new task</h1>
+        )}
       </div>
       <div className="buttons-container">
         <CustomButton text="Tasks" onClick={() => navigate("/tasks")} />
