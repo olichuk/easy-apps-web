@@ -4,12 +4,12 @@ import { getProfileThunk } from "./getProfileThunk";
 
 export const updateProfileThunk = createAsyncThunk<
   void,
-  FormData,
+  { name: string; avatar?: File | null },
   { rejectValue: string }
->("user/updateProfile", async (formData, { dispatch, rejectWithValue }) => {
+>("user/updateProfile", async ({ name, avatar }, { dispatch, rejectWithValue }) => {
   try {
-    await updateProfileApi(formData);
-    await dispatch(getProfileThunk()); 
+    await updateProfileApi(name, avatar);
+    await dispatch(getProfileThunk());
   } catch {
     return rejectWithValue("Failed to update profile");
   }

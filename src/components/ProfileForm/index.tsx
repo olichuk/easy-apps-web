@@ -6,28 +6,17 @@ import ImagePicker from "../ImagePicker";
 import { Formik } from "formik";
 import { useProfile } from "../../hooks/useProfile";
 import { useDispatch } from "react-redux";
-import { updateProfileThunk } from "../../store/asyncActions/updateProfileThunk";
-import { deleteAvatarThunk } from "../../store/asyncActions/deleteAvatarThunk";
+import { saveProfileThunk } from "../../store/asyncActions/saveProfileThunk";
 import { TAppDispatch } from "../../store";
-import { logoutThunk } from "../../store/asyncActions/logoutThunk";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { logoutWithRedirectThunk } from "../../store/asyncActions/logoutWithRedirectThunk";
 
 const ProfileForm = () => {
   const { data, loading } = useProfile();
   const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const handleLogoutClick = () => {
-    if (!window.confirm("Are you sure you want to log out?")) return;
-      setIsLoggingOut(true);
-      dispatch(logoutThunk())
-        .unwrap()
-        .then(() => navigate("/login", { replace: true }))
-        .catch(() => alert("Failed to logout, please try again"))
-        .finally(() => setIsLoggingOut(false));
-  };
 
   if (loading || !data) return <div>Loading...</div>;
 
@@ -41,21 +30,8 @@ const ProfileForm = () => {
       }}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const formData = new FormData();
-          formData.append("username", values.name);
-
-          if (values.avatar) {
-            formData.append("avatar", values.avatar);
-          }
-
-          if (!values.avatarPreview && data.avatar) {
-            await dispatch(deleteAvatarThunk());
-          }
-
-          if (values.name !== data.name || values.avatar) {
-            await dispatch(updateProfileThunk(formData));
-            alert("Profile updated successfully");
-          }
+          await dispatch(saveProfileThunk(values)).unwrap();
+          alert("Profile updated successfully");
         } catch {
           alert("Failed to update profile");
         } finally {
@@ -97,7 +73,15 @@ const ProfileForm = () => {
                 disabled={!isDirty || !values.name.trim()}
                 onClick={() => handleSubmit()}
               />
-              <CustomButton text={isLoggingOut ? "Logging out..." : "Logout"} onClick={handleLogoutClick} disabled={isLoggingOut} />
+              <CustomButton
+                text={isLoggingOut ? "Logging out..." : "Logout"}
+                onClick={async () => {
+                  setIsLoggingOut(true);
+                  await dispatch(logoutWithRedirectThunk(navigate));
+                  setIsLoggingOut(false);
+                }}
+                disabled={isLoggingOut}
+              />
             </div>
           </div>
         );
