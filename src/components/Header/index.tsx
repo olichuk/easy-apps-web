@@ -4,11 +4,19 @@ import CustomButton from "../CustomButton";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TRootState } from "../../store/index";
 
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
+  const taskCounter = useSelector(
+    (state: TRootState) => state.tasks.tasks.length
+  );
+  const formatTaskCounter = (count: number) => {
+    return count === 1 ? `${count} task` : `${count} tasks`;
+  };
   return (
     <header className="header">
       <Link to="/tasks" className="logo-link">
@@ -19,7 +27,9 @@ const Header = () => {
           <div className="header-title-container">
             <div className="header-counter-container">
               <p className="header-counter-title">You Have </p>
-              <p className="header-counter-title">{"count"} tasks here</p>
+              <p className="header-counter-title">
+                {formatTaskCounter(taskCounter)} here
+              </p>
             </div>
             <CustomButton
               text="+ Add Task"
@@ -32,6 +42,9 @@ const Header = () => {
         )}
         {currentPath === "/common-tasks" && (
           <h1 className="header-title">Common Tasks</h1>
+        )}
+        {currentPath === "/tasks/add" && (
+          <h1 className="header-title">Add new task</h1>
         )}
       </div>
       <div className="buttons-container">

@@ -1,0 +1,21 @@
+.tasks-page-container {
+  display: flex;
+  justify-content: flex-start;
+  background-color: var(--lightGray);
+  min-height: 100vh;
+  padding: 30px;
+  align-items: center;
+  flex-direction: column;
+}
+.tasks-page-container-message {
+  font-size: 16px;
+  color: var(--darkGray);
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .tasks-page-container {
+    padding: 60px;
+  }
+}

@@ -1,0 +1,88 @@
+.task-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 12px;
+  background-color: var(--white);
+  width: 310px;
+  height: 46px;
+  cursor: pointer;
+  padding: 0 8px;
+  margin-bottom: 12px;
+}
+
+.task-container__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-container__checkbox__uncompleted {
+  width: 21.56px;
+  height: 21px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.task-container__checkbox__completed {
+  width: 23px;
+  height: 22px;
+}
+
+.task-container__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.task-container__title__completed {
+  text-decoration: line-through;
+}
+
+.task-container__actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.task-container__actions__icon {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+}
+
+.task-container__actions__icon img {
+  width: 21px;
+  height: 21px;
+}
+
+@media screen and (min-width: 992px) {
+  .task-container {
+    width: 465px;
+    height: 65px;
+  }
+  .task-container__title {
+    font-size: 24px;
+  }
+  .task-container__actions__icon {
+    width: 34px;
+    height: 34px;
+    padding: 4px;
+  }
+
+  .task-container__actions__icon img {
+    width: 25px;
+    height: 25px;
+  }
+  .task-container__checkbox__uncompleted {
+    width: 23px;
+    height: 23px;
+  }
+  .task-container__checkbox__completed {
+    width: 25px;
+    height: 25px;
+  }
+}
