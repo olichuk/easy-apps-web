@@ -6,7 +6,6 @@
   background-color: var(--white);
   width: 310px;
   height: 46px;
-  cursor: pointer;
   padding: 0 8px;
   margin-bottom: 12px;
 }
@@ -15,6 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .task-container__checkbox__uncompleted {
@@ -33,6 +33,11 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--black);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .task-container__title__completed {
@@ -52,6 +57,7 @@
   width: 28px;
   height: 28px;
   padding: 3px;
+  cursor: pointer;
 }
 
 .task-container__actions__icon img {

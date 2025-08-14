@@ -10,6 +10,7 @@ export interface TasksState {
   tasks: Task[];
   isLoading: boolean;
   isError: string | null;
+  currentTask: Task | null;
 }
 
 export interface TasksPayload {
