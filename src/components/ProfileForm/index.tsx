@@ -11,6 +11,7 @@ import { TAppDispatch } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { logoutWithRedirectThunk } from "../../store/asyncActions/logoutWithRedirectThunk";
+import { BarLoader } from "react-spinners";
 
 const ProfileForm = () => {
   const { data, loading } = useProfile();
@@ -18,7 +19,13 @@ const ProfileForm = () => {
   const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  if (loading || !data) return <div>Loading...</div>;
+  if (loading || !data) {
+    return (
+      <div className="loader-container">
+        <BarLoader color={"var(--violet)"} loading={true} />
+      </div>
+    );
+  }
 
   return (
     <Formik
@@ -32,8 +39,12 @@ const ProfileForm = () => {
         try {
           await dispatch(saveProfileThunk(values)).unwrap();
           alert("Profile updated successfully");
-        } catch {
-          alert("Failed to update profile");
+        } catch (rejectedValue) {
+          if (typeof rejectedValue === "string") {
+            alert(rejectedValue);
+          } else {
+            alert("Failed to update profile");
+          }
         } finally {
           setSubmitting(false);
         }
@@ -45,7 +56,7 @@ const ProfileForm = () => {
           values.name !== data.name ||
           values.avatar !== null ||
           (values.avatarPreview === "" && data.avatar);
-        
+
         return (
           <div className="profile-form-container">
             <ImagePicker values={values} setFieldValue={setFieldValue} />
