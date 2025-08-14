@@ -1,17 +1,15 @@
 /** @format */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import CustomButton from "../../components/CustomButton";
-
 import ProgressStatus from "../../components/ProgressStatus/index";
 import useTasks from "../../hooks/useTasks";
-
 import "./styles.css";
 import DetailsTaskAttachmentsItem from "../../components//DetailsTaskAttachments/index";
+import { BarLoader } from "react-spinners";
 
 const TaskDetailsPage = () => {
-  const { currentTask, getTaskById, deleteTask } = useTasks();
+  const { currentTask, getTaskById, deleteTask, loading } = useTasks();
   const { id } = useParams<{ id: string }>();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   false;
@@ -50,7 +48,11 @@ const TaskDetailsPage = () => {
     }
   };
 
-  return (
+  return loading ? (
+    <div className="task-details-loader-container">
+      <BarLoader color={"var(--violet)"} loading={true} />
+    </div>
+  ) : (
     <div className="task-details-page-container">
       <span className="task-details-page-title">{currentTask.title}</span>
       {currentTask.description && (
