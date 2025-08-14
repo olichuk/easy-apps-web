@@ -53,7 +53,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.accessToken = action.payload;
           state.isError = null;
-          sessionStorage.setItem("accessToken", action.payload); // если нужно и тут сохранять
+          sessionStorage.setItem("accessToken", action.payload);
         }
       )
       .addCase(signUpAsyncAction.rejected, (state, action) => {
@@ -65,7 +65,7 @@ const authSlice = createSlice({
       .addCase(logoutThunk.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = null;
-        state.accessToken = ""; // Найважливіший рядок! Очищуємо токен.
+        state.accessToken = "";
       });
   },
 });

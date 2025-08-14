@@ -44,10 +44,12 @@ const Header = () => {
                 {formatTaskCounter(taskCounter)} here
               </p>
             </div>
-            <CustomButton
-              text="+ Add Task"
-              onClick={() => navigate("/tasks/add")}
-            />
+            <div className="header-title-container-button">
+              <CustomButton
+                text="+ Add Task"
+                onClick={() => navigate("/tasks/add")}
+              />
+            </div>
           </div>
         )}
         {currentPath === "/profile" && (
