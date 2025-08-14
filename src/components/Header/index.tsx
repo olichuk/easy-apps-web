@@ -18,8 +18,20 @@ const Header = () => {
   const formatTaskCounter = (count: number) => {
     return count === 1 ? `${count} task` : `${count} tasks`;
   };
+  const getHeaderClass = () => {
+    switch (currentPath) {
+      case "/tasks":
+        return "header-tasks";
+      case "/profile":
+        return "header-profile";
+      case "/common-tasks":
+        return "header-common-tasks";
+      default:
+        return "";
+    }
+  };
   return (
-    <header className="header">
+    <header className={`header ${getHeaderClass()}`}>
       <Link to="/tasks" className="logo-link">
         <img src={Logo} alt="Logo" className="logo" />
       </Link>
@@ -27,6 +39,7 @@ const Header = () => {
         {currentPath === "/tasks" && (
           <div className="header-title-container">
             <div className="header-counter-container">
+              <h1 className="greeting-title">Hello there</h1>
               <p className="header-counter-title">You Have </p>
               <p className="header-counter-title">
                 {formatTaskCounter(taskCounter)} here

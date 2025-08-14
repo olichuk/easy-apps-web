@@ -9,7 +9,7 @@
   width: 100%;
 }
 .add-attachment-fixed {
-  flex-shrink: 0; /* Не дозволяє кнопці зменшуватись */
+  flex-shrink: 0;
 }
 .attachments-list {
   display: flex;
@@ -17,10 +17,9 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 4px 0;
-  max-width: 200px; /* Обмежуємо ширину - покаже ~2.5 фото */
+  max-width: 200px;
   width: 100%;
 
-  /* Стилі для скролбару */
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 transparent;
 }

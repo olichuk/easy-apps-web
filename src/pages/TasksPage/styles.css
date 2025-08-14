@@ -9,9 +9,24 @@
 }
 .tasks-page-container-message {
   font-size: 16px;
-  color: var(--darkGray);
-  text-align: center;
+  font-weight: 600;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   margin-top: 20px;
+}
+
+.no-tasks-message {
+  margin: 0;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
 }
 
 @media screen and (min-width: 992px) {

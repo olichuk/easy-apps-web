@@ -16,6 +16,10 @@
   gap: 20%;
 }
 
+.links img {
+  width: 45px;
+}
+
 .nav-link {
   color: var(--white);
   text-decoration: none;

@@ -6,6 +6,7 @@ import {
   signInAsyncAction,
   signUpAsyncAction,
 } from "../asyncActions/authAsyncActions";
+import { logoutThunk } from "../asyncActions/logoutThunk";
 
 const initialState: AuthState = {
   accessToken: sessionStorage.getItem("accessToken") || "",
@@ -60,6 +61,11 @@ const authSlice = createSlice({
         state.isError = action.payload as string;
         state.accessToken = "";
         sessionStorage.removeItem("accessToken");
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+        state.accessToken = ""; // Найважливіший рядок! Очищуємо токен.
       });
   },
 });
