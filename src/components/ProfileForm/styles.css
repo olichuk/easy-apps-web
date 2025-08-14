@@ -32,3 +32,9 @@
 .avatar-input-container {
   margin-top: 20px;
 }
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

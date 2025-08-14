@@ -54,20 +54,21 @@ const ImagePicker = ({ values, setFieldValue }: IProps) => {
       />
 
       <img src={imageUrl} alt="Avatar" className="avatar-preview" />
-      <div className="picker-edit-icon-container">
-        <img
-          className="picker-edit-icon"
-          src={editIcon}
-          alt="Edit"
-          onClick={handleEditClick}
-        />
-      </div>
+
       <div className="picker-delete-icon-container">
         <img
           className="picker-delete-icon"
           src={deleteIcon}
           alt="Delete"
           onClick={handleDeleteClick}
+        />
+      </div>
+      <div className="picker-edit-icon-container">
+        <img
+          className="picker-edit-icon"
+          src={editIcon}
+          alt="Edit"
+          onClick={handleEditClick}
         />
       </div>
     </div>

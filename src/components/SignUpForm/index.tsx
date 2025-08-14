@@ -62,6 +62,7 @@ const SignUpForm = () => {
               label="Repeat password"
               onChange={handleChange("repeatPassword")}
               type="password"
+              isShowPassword
             />
             {errors.repeatPassword && (
               <TextError error={errors.repeatPassword} />
