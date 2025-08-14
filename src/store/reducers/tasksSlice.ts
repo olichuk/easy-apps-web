@@ -11,6 +11,7 @@ const initialState: TasksState = {
   tasks: [],
   isLoading: false,
   isError: null,
+  currentTask: null,
 };
 
 const tasksSlice = createSlice({
@@ -23,16 +24,13 @@ const tasksSlice = createSlice({
         state.isLoading = true;
         state.isError = null;
       })
-      .addCase(getTasksAsyncAction.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.tasks = action.payload.tasks;
-      })
       .addCase(getTasksAsyncAction.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload as string;
       })
-      .addCase(deleteTaskAsyncAction.pending, (state) => {
-        state.isLoading = true;
+      .addCase(getTasksAsyncAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.tasks = action.payload.tasks;
         state.isError = null;
       })
       .addCase(createTaskAsyncAction.pending, (state) => {
@@ -43,6 +41,15 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.isError = action.payload as string;
       })
+      .addCase(deleteTaskAsyncAction.pending, (state) => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(deleteTaskAsyncAction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload as string;
+      })
+
       .addCase(getTaskByIdAsyncAction.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
@@ -51,11 +58,11 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.isError = action.payload as string;
       })
-      .addCase(getTaskByIdAsyncAction.fulfilled, (state) => {
+      .addCase(getTaskByIdAsyncAction.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.currentTask = action.payload;
         state.isError = null;
       });
   },
 });
-
 export default tasksSlice.reducer;

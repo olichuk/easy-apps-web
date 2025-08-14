@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import CustomButton from "../CustomButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const taskCounter = useSelector(
     (state: TRootState) => state.tasks.tasks.length
   );
@@ -58,6 +59,9 @@ const Header = () => {
         )}
         {currentPath === "/tasks/add" && (
           <h1 className="header-title">Add new task</h1>
+        )}
+        {id && currentPath === `/task/${id}` && (
+          <h1 className="header-title">Task Details</h1>
         )}
       </div>
       <div className="buttons-container">

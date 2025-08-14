@@ -12,7 +12,10 @@ export const createTaskApi = async (
   const formData = new FormData();
 
   formData.append("title", title);
-  formData.append("description", description);
+
+  if (description.trim()) {
+    formData.append("description", description);
+  }
 
   if (files?.length) {
     files.forEach((file) => {

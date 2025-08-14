@@ -62,7 +62,7 @@ export const createTaskAsyncAction = createAsyncThunk(
   ) => {
     try {
       await createTaskApi(title, description, files);
-      dispatch(getTasksAsyncAction());
+      await dispatch(getTasksAsyncAction());
       if (onSuccess) {
         onSuccess();
       }

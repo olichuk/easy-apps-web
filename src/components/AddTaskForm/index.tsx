@@ -69,6 +69,7 @@ const AddTaskForm = () => {
           </div>
           <div className="add-task-form-button">
             <CustomButton
+              type="submit"
               text={isSubmitting ? "Saving..." : "Save"}
               onClick={() => handleSubmit()}
             />

@@ -1,0 +1,77 @@
+.task-details-page-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  min-height: 100vh;
+  background-color: var(--lightGray);
+}
+
+.task-details-page-title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 22px;
+  width: 90%;
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+
+.task-details-page-description {
+  font-weight: 400;
+  font-size: 18px;
+  width: 90%;
+  margin-bottom: 8px;
+  color: var(--darkGray);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.task-details-page-attachments-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+  max-width: 92%;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 transparent;
+}
+.attachments-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.attachments-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.attachments-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 3px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-right: 20px;
+  padding-bottom: 80px;
+  gap: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.actions .button {
+  width: 145px;
+}
+
+@media screen and (min-width: 992px) {
+  .actions {
+    margin-top: 50px;
+  }
+}
+.task-details-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--lightGray);
+}

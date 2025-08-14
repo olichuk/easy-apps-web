@@ -10,6 +10,8 @@ import CommonTasksPage from "../../pages/CommonTasksPage/CommonTasksPage";
 import CurrentUserPage from "../../pages/CurrentUserPage/index";
 import ProtectedRoute from "../ProtectedRoute";
 import TaskCreatorPage from "../../pages/TaskCreatorPage";
+import TaskEditorPage from "../../pages/TaskEditorPage";
+import TaskDetailsPage from "../../pages/TaskDetailsPage";
 
 const AppNavigation = () => {
   return (
@@ -30,6 +32,8 @@ const AppNavigation = () => {
           <Route path="/profile" element={<CurrentUserPage />} />
           <Route path="/common-tasks" element={<CommonTasksPage />} />
           <Route path="/tasks/add" element={<TaskCreatorPage />} />
+          <Route path="/task/edit/:id" element={<TaskEditorPage />} />
+          <Route path="/task/:id" element={<TaskDetailsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
