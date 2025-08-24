@@ -4,9 +4,10 @@ import {
   createTaskApi,
   getTaskByIdApi,
   deleteTaskApi,
+  changeTaskStatusApi,
 } from "../../api/taskApi";
 import { isAxiosError } from "axios";
-import { TasksPayload } from "../../interfaces/tasks";
+import { TasksPayload, StatusPayload } from "../../interfaces/tasks";
 
 export const getTasksAsyncAction = createAsyncThunk(
   "tasks",
@@ -88,6 +89,29 @@ export const deleteTaskAsyncAction = createAsyncThunk(
   async (id: string, { rejectWithValue, dispatch }) => {
     try {
       await deleteTaskApi(id);
+      dispatch(getTasksAsyncAction());
+    } catch (error) {
+      let errorMessage = "An unexpected error occurred";
+      if (isAxiosError(error)) {
+        if (error.response?.data?.error) {
+          errorMessage = error.response?.data?.error;
+          console.log(error.response);
+        } else if (error.response?.data?.errors) {
+          errorMessage = error.response?.data?.errors.join("\n");
+          console.log(error.response);
+        }
+      }
+      alert(errorMessage);
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const changeTaskStatusAsyncAction = createAsyncThunk(
+  "task/:id",
+  async ({ _id, done }: StatusPayload, { rejectWithValue, dispatch }) => {
+    try {
+      await changeTaskStatusApi(String(_id), Boolean(done));
       dispatch(getTasksAsyncAction());
     } catch (error) {
       let errorMessage = "An unexpected error occurred";
