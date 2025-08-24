@@ -1,22 +1,31 @@
-.tasks-page-container {
+.common-tasks-page-container {
   display: flex;
   justify-content: flex-start;
   background-color: var(--lightGray);
   min-height: 100vh;
-  padding: 30px;
+  padding-top: 10px;
   align-items: center;
   flex-direction: column;
   padding-bottom: 70px;
 }
-.tasks-page-container-message {
+.common-tasks-page-container-message {
   font-size: 16px;
   font-weight: 600;
   color: var(--black);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   margin-top: 20px;
+}
+.common-tasks-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.common-tasks-page-load-more-button {
+  margin: 10px;
 }
 
 .no-tasks-message {
@@ -31,7 +40,7 @@
 }
 
 @media screen and (min-width: 992px) {
-  .tasks-page-container {
+  .common-tasks-page-container {
     padding: 60px;
   }
 }

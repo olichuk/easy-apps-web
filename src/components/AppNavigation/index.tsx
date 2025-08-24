@@ -6,7 +6,7 @@ import React from "react";
 import SignUpPage from "../../pages/SignUpPage/index";
 import TasksPage from "../../pages/TasksPage";
 import ProtectedLayout from "../ProtectedLayout";
-import CommonTasksPage from "../../pages/CommonTasksPage/CommonTasksPage";
+import CommonTasksPage from "../../pages/CommonTasksPage/index";
 import CurrentUserPage from "../../pages/CurrentUserPage/index";
 import ProtectedRoute from "../ProtectedRoute";
 import TaskCreatorPage from "../../pages/TaskCreatorPage";

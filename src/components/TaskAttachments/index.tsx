@@ -1,6 +1,5 @@
 import React from "react";
 import AddAttachmentButton from "./AddAttachmentsButton";
-
 import "./styles.css";
 import TasksAttachmentsItem from "./TaskAttachmentsItem";
 
