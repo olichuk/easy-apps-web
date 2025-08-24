@@ -12,24 +12,29 @@ const TaskDetailsPage = () => {
   const { currentTask, getTaskById, deleteTask, loading } = useTasks();
   const { id } = useParams<{ id: string }>();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  false;
   const navigate = useNavigate();
+
   useEffect(() => {
     if (id) {
       getTaskById(id);
     }
   }, [id]);
-  if (!currentTask) return <p>Loading...</p>;
+
+  if (loading || !currentTask) {
+    return (
+      <div className="task-details-loader-container">
+        <BarLoader color={"var(--violet)"} loading={true} />
+      </div>
+    );
+  }
 
   let filesArray: (File | string)[] = [];
 
   if (currentTask?.files) {
     try {
       if (Array.isArray(currentTask.files)) {
-        // Якщо бек віддав масив
         filesArray = currentTask.files;
       } else if (typeof currentTask.files === "string") {
-        // Якщо бек віддав JSON-рядок
         const parsed = JSON.parse(currentTask.files);
         filesArray = Array.isArray(parsed) ? parsed : [];
       } else {
@@ -43,7 +48,7 @@ const TaskDetailsPage = () => {
 
   const handleDeleteClick = () => {
     if (window.confirm("Are you sure?")) {
-      deleteTask(currentTask.id);
+      deleteTask(currentTask._id);
       navigate("/tasks");
     }
   };
@@ -60,6 +65,7 @@ const TaskDetailsPage = () => {
           {currentTask.description}
         </span>
       )}
+
       <ProgressStatus done={currentTask?.done || false} />
 
       <div className="task-details-page-attachments-list">
@@ -74,7 +80,7 @@ const TaskDetailsPage = () => {
         <CustomButton text="Delete" onClick={handleDeleteClick} />
         <CustomButton
           text="Edit"
-          onClick={() => navigate(`/task/edit/${currentTask.id}`)}
+          onClick={() => navigate(`/task/edit/${currentTask._id}`)}
         />
       </div>
 
