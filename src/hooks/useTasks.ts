@@ -4,6 +4,7 @@ import {
   deleteTaskAsyncAction,
   getTaskByIdAsyncAction,
   getTasksAsyncAction,
+  updateTaskAsyncAction,
 } from "../store/asyncActions/tasksAsyncActions";
 import { TRootState, TAppDispatch } from "../store";
 import { Task } from "../interfaces/tasks";
@@ -40,6 +41,19 @@ const useTasks = () => {
   const getTaskById = (id: string) => {
     dispatch(getTaskByIdAsyncAction(id));
   };
+
+  const updateTask = (
+    id: string,
+    title: string,
+    description: string,
+    files: File[],
+    onSuccess?: () => void
+  ) => {
+    dispatch(updateTaskAsyncAction({ id, title, description, files }))
+      .unwrap()
+      .then(() => onSuccess?.())
+      .catch((err) => console.error(err));
+  };
   return {
     tasks,
     loading,
@@ -49,6 +63,7 @@ const useTasks = () => {
     deleteTask,
     createTask,
     getTaskById,
+    updateTask,
   };
 };
 

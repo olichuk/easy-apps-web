@@ -7,6 +7,7 @@ import {
 } from "../../api/taskApi";
 import { isAxiosError } from "axios";
 import { TasksPayload } from "../../interfaces/tasks";
+import axios from "axios";
 
 export const getTasksAsyncAction = createAsyncThunk(
   "tasks",
@@ -102,6 +103,28 @@ export const deleteTaskAsyncAction = createAsyncThunk(
       }
       alert(errorMessage);
       return rejectWithValue(errorMessage);
+    }
+  }
+
+  
+
+);
+
+export const updateTaskAsyncAction = createAsyncThunk(
+  "tasks/updateTask",
+  async ({ id, title, description, files }: { id: string; title: string; description: string; files: File[] }, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      files.forEach((file) => formData.append("files", file));
+
+      const response = await axios.put(`https://easy-apps-backend-dev-7oxz.onrender.com/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Update task failed");
     }
   }
 );

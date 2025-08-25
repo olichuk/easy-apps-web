@@ -23,7 +23,7 @@ const TaskAttachments = ({
         </div>
 
         <div className="attachments-list">
-          {attachments.map((item, index) => (
+          {Array.isArray(attachments) && attachments.map((item, index) => (
             <div key={index} className="attachment-item-wrapper">
               <TasksAttachmentsItem
                 attachment={item}

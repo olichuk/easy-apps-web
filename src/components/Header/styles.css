@@ -7,6 +7,35 @@
   align-items: center;
 }
 
+.header.edit-task {
+  justify-content: center;
+}
+
+/* .header.edit-task .title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+} */
+
+.header.edit-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 145px; 
+  padding: 0 20px;
+}
+
+.header.edit-task .title-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--white);
+}
+
 .header-tasks {
   height: 148px;
 }
@@ -18,6 +47,7 @@
 .header-common-tasks {
   height: 80px;
 }
+
 
 .logo-link {
   display: none;
