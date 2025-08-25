@@ -1,0 +1,33 @@
+.task-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 12px;
+  background-color: var(--white);
+  width: 277px;
+  height: 56px;
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+
+.task-container__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 277px;
+}
+
+@media screen and (min-width: 992px) {
+  .task-container {
+    width: 465px;
+    height: 65px;
+  }
+  .task-container__title {
+    font-size: 24px;
+    max-width: 456px;
+  }
+}

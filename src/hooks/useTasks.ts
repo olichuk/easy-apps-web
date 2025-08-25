@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeTaskStatusAsyncAction,
   createTaskAsyncAction,
   deleteTaskAsyncAction,
   getTaskByIdAsyncAction,
@@ -54,6 +55,10 @@ const useTasks = () => {
       .then(() => onSuccess?.())
       .catch((err) => console.error(err));
   };
+  
+  const changeTaskStatus = (_id: string, done: boolean) => {
+    dispatch(changeTaskStatusAsyncAction({ _id, done }));
+  };
   return {
     tasks,
     loading,
@@ -64,6 +69,7 @@ const useTasks = () => {
     createTask,
     getTaskById,
     updateTask,
+    changeTaskStatus,
   };
 };
 

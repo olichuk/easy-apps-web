@@ -1,5 +1,5 @@
 export interface Task {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   done: boolean;
@@ -11,6 +11,10 @@ export interface TasksState {
   isLoading: boolean;
   isError: string | null;
   currentTask: Task | null;
+  page: number;
+  totalCount: number;
+  tasksPerPage: number;
+  hasMore: boolean;
 }
 
 export interface TasksPayload {
@@ -19,3 +23,15 @@ export interface TasksPayload {
   files?: File[];
   onSuccess?: () => void;
 }
+export interface CommonTasks {
+  page: number;
+  tasksPerPage: number;
+}
+export type CommonTasksParams = {
+  page: number;
+  tasksPerPage: number;
+};
+export type StatusPayload = {
+  _id: string;
+  done: boolean;
+};

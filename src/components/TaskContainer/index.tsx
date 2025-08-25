@@ -1,42 +1,51 @@
 import "./styles.css";
-import React, { useState } from "react";
+import React from "react";
 import checkedIcon from "../../assets/icons/check-active-icon.svg";
 import editIcon from "../../assets/icons/edit-pencil-icon.svg";
 import deleteIcon from "../../assets/icons/trash-can-icon.svg";
 import { useNavigate } from "react-router-dom";
+import useTasks from "../../hooks/useTasks";
 
 interface IProps {
-  id: string;
+  _id: string;
   title: string;
   done: boolean;
-  deleteTask: (id: string) => void;
+  deleteTask: (_id: string) => void;
+  changeStatus?: (isDone: boolean) => void;
 }
 
-const TaskContainer = ({ id, title, done, deleteTask }: IProps) => {
-  const [isDone, setIsDone] = useState(done);
+const TaskContainer = ({
+  _id,
+  title,
+  done,
+  deleteTask,
+  changeStatus,
+}: IProps) => {
+  const { changeTaskStatus } = useTasks();
   const navigate = useNavigate();
   const handleCheckboxClick = () => {
-    setIsDone(!isDone);
+    _id && changeTaskStatus(_id, !done);
+    changeStatus?.(!done);
   };
 
   const handleTaskClick = () => {
-    navigate(`/task/${id}`);
+    navigate(`/task/${_id}`);
   };
   const handleEditClick = () => {
-    navigate(`/task/edit/${id}`);
+    navigate(`/task/edit/${_id}`);
   };
 
   const handleDeleteClick = () => {
     if (window.confirm("Are you sure?")) {
-      console.log(`Delete task ${id}`);
-      deleteTask(id);
+      console.log(`Delete task ${_id}`);
+      deleteTask(_id);
     }
   };
 
   return (
     <div className="task-container">
       <div className="task-container__checkbox" onClick={handleCheckboxClick}>
-        {isDone ? (
+        {done ? (
           <img
             src={checkedIcon}
             alt="Checked"
@@ -47,7 +56,7 @@ const TaskContainer = ({ id, title, done, deleteTask }: IProps) => {
         )}
       </div>
       <span
-        className={`task-container__title ${isDone ? "task-container__title__completed" : ""}`}
+        className={`task-container__title ${done ? "task-container__title__completed" : ""}`}
         onClick={handleTaskClick}
       >
         {title}

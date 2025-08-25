@@ -33,8 +33,8 @@ const TasksPage = () => {
           ) : (
             tasks.map((task) => (
               <TaskContainer
-                key={task.id}
-                id={task.id}
+                key={task._id}
+                _id={task._id}
                 title={task.title}
                 done={task.done}
                 deleteTask={deleteTask}
