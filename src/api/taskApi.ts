@@ -36,3 +36,13 @@ export const getTaskByIdApi = async (id: string) => {
 export const deleteTaskApi = async (id: string) => {
   return axiosInstance.delete(`/tasks/${id}`);
 };
+
+export const changeTaskStatusApi = (id: string, done: boolean) => {
+  const formData = new FormData();
+  formData.append("done", String(done));
+  return axiosInstance.patch(`/tasks/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
