@@ -3,12 +3,13 @@ import DeleteIcon from "../../../assets/icons/trash-can-icon.svg";
 import "./styles.css";
 
 interface IProps {
-  attachment: File;
+  attachment: File | string;
   removeAttachment: (attachmentToDelete: File) => void;
 }
 
 const TasksAttachmentsItem = ({ attachment, removeAttachment }: IProps) => {
-  const previewUrl = URL.createObjectURL(attachment);
+  const previewUrl =
+    attachment instanceof File ? URL.createObjectURL(attachment) : attachment;
 
   return (
     <div className="attachment-container">
@@ -17,7 +18,7 @@ const TasksAttachmentsItem = ({ attachment, removeAttachment }: IProps) => {
         <img
           src={DeleteIcon}
           alt="Delete"
-          onClick={() => removeAttachment(attachment)}
+          onClick={() => removeAttachment(attachment as File)}
         />
       </div>
     </div>

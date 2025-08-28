@@ -1,64 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React from "react";
 import { Formik } from "formik";
 import validationSchemaAddTasks from "../../validation/validationSchemaAddTask";
-
-import useTasks from "../../hooks/useTasks";
 import TaskAttachments from "../../components/TaskAttachments/index";
 import CustomInput from "../CustomInput/index";
 import CustomButton from "../CustomButton/index";
 import TextError from "../../components/TextError/index";
-
-
-
+import useEditTask from "../../hooks/useEditTask";
 
 const EditTaskPage = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { currentTask, getTaskById, updateTask, deleteTask, loading } = useTasks();
-
-  const [files, setFiles] = useState<File[]>([]);
-
-  useEffect(() => {
-    if (id) {
-      getTaskById(id);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (currentTask?.files) {
-      setFiles(currentTask.files);
-    }
-  }, [currentTask]);
-
-  const addFile = (file: File) => {
-    setFiles((prev) => [...prev, file]);
-  };
-
-  const removeFile = (fileToRemove: File) => {
-    setFiles((prev) => prev.filter((f) => f !== fileToRemove));
-  };
-
-  const handleSubmit = (values: { title: string; description: string }) => {
-    if (!id) return;
-    updateTask(id, values.title, values.description, files, () => {
-      navigate("/tasks");
-    });
-  };
-
-
-  const handleDeleteClick = () => {
-    if (!id) return;
-    deleteTask(id);
-    navigate("/tasks");
-  };
+  const {
+    currentTask,
+    loading,
+    files,
+    handleSubmit,
+    addFile,
+    removeFile,
+    handleDeleteClick,
+  } = useEditTask();
 
   return (
     <Formik
       enableReinitialize
       initialValues={{
+        _id: currentTask?._id || "",
         title: currentTask?.title || "",
         description: currentTask?.description || "",
+        files: [] as File[],
+        done: currentTask?.done || false,
+        oldFiles: (currentTask?.files as string[]) || [],
       }}
       validationSchema={validationSchemaAddTasks}
       onSubmit={handleSubmit}
@@ -81,6 +50,15 @@ const EditTaskPage = () => {
               onChange={(e) => setFieldValue("description", e.target.value)}
             />
             {errors.description && <TextError error={errors.description} />}
+
+            <label>
+              Completed:
+              <input
+                type="checkbox"
+                checked={values.done}
+                onChange={(e) => setFieldValue("done", e.target.checked)}
+              />
+            </label>
 
             <TaskAttachments
               attachments={files}

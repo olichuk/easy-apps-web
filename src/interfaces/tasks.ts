@@ -3,7 +3,7 @@ export interface Task {
   title: string;
   description: string;
   done: boolean;
-  files?: File[];
+  files?: (File | string)[];
 }
 
 export interface TasksState {

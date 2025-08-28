@@ -47,15 +47,24 @@ const useTasks = () => {
     id: string,
     title: string,
     description: string,
-    files: File[],
-    onSuccess?: () => void
+    files: (File | string)[],
+    done: boolean,
+    oldFiles: string[],
+    onSucsess?: () => void
   ) => {
-    dispatch(updateTaskAsyncAction({ id, title, description, files }))
-      .unwrap()
-      .then(() => onSuccess?.())
-      .catch((err) => console.error(err));
+    dispatch(
+      updateTaskAsyncAction({
+        id,
+        title,
+        description,
+        files,
+        done,
+        oldFiles,
+        onSucsess,
+      })
+    );
   };
-  
+
   const changeTaskStatus = (_id: string, done: boolean) => {
     dispatch(changeTaskStatusAsyncAction({ _id, done }));
   };
