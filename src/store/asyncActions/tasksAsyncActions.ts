@@ -6,13 +6,10 @@ import {
   deleteTaskApi,
   changeTaskStatusApi,
   editTaskApi,
-  deleteFileApi,
 } from "../../api/taskApi";
 import { isAxiosError } from "axios";
 import type { TasksPayload, StatusPayload } from "../../interfaces/tasks";
 import type { Task } from "../../interfaces/tasks";
-import { taskInfoSelector } from "../selectors/taskSelectors";
-import { TRootState } from "..";
 
 export const getTasksAsyncAction = createAsyncThunk(
   "tasks",
@@ -128,8 +125,7 @@ export const updateTaskAsyncAction = createAsyncThunk(
       description,
       files,
       done,
-      oldFiles,
-      onSucsess,
+      onSuccess,
     }: {
       id: string;
       title: string;
@@ -137,26 +133,15 @@ export const updateTaskAsyncAction = createAsyncThunk(
       files: (File | string)[];
       done: boolean;
       oldFiles: string[];
-      onSucsess?: () => void;
+      onSuccess?: () => void;
     },
-    { rejectWithValue, dispatch, getState }
+    { rejectWithValue, dispatch }
   ) => {
     try {
-      const state: TRootState = getState() as TRootState;
-      const taskInfo: Task | undefined = taskInfoSelector(id)(state);
-      if (taskInfo) {
-        const deletedFiles = taskInfo!.files!.filter(
-          (fileUrl): fileUrl is string =>
-            typeof fileUrl === "string" && !oldFiles.includes(fileUrl)
-        );
-        for (let i = 0; i < deletedFiles.length; i++) {
-          await deleteFileApi(id, deletedFiles[i]);
-        }
-      }
       const response = await editTaskApi(id, title, description, files, done);
       await dispatch(getTasksAsyncAction());
-      if (onSucsess) {
-        onSucsess();
+      if (onSuccess) {
+        onSuccess();
       }
       return response.data;
     } catch (error: any) {

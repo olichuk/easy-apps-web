@@ -1,5 +1,5 @@
-.task-creator-page {
-  background-color: var(--lightGaray);
+.edit-task-page {
+  background-color: var(--lightGray);
   display: flex;
   justify-content: flex-start;
   min-height: 100vh;

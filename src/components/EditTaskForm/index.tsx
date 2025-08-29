@@ -1,17 +1,19 @@
 import React from "react";
 import { Formik } from "formik";
 import validationSchemaAddTasks from "../../validation/validationSchemaAddTask";
-import TaskAttachments from "../../components/TaskAttachments/index";
+// import TaskAttachments from "../../components/TaskAttachments/index";
 import CustomInput from "../CustomInput/index";
 import CustomButton from "../CustomButton/index";
 import TextError from "../../components/TextError/index";
 import useEditTask from "../../hooks/useEditTask";
+import "./styles.css";
+import TaskAttachments from "../TaskAttachments";
 
 const EditTaskPage = () => {
   const {
     currentTask,
     loading,
-    files,
+    // files,
     handleSubmit,
     addFile,
     removeFile,
@@ -25,16 +27,21 @@ const EditTaskPage = () => {
         _id: currentTask?._id || "",
         title: currentTask?.title || "",
         description: currentTask?.description || "",
-        files: [] as File[],
         done: currentTask?.done || false,
-        oldFiles: (currentTask?.files as string[]) || [],
+        files: [],
+        oldFiles:
+          currentTask && Array.isArray(currentTask.files)
+            ? (currentTask.files.filter(
+                (f) => typeof f === "string"
+              ) as string[])
+            : [],
       }}
       validationSchema={validationSchemaAddTasks}
       onSubmit={handleSubmit}
     >
       {({ handleSubmit, setFieldValue, errors, values, isSubmitting }) => (
-        <div className="add-task-form-container">
-          <div className="add-task-form-inputs">
+        <div className="edit-task-form-container">
+          <div className="edit-task-form-inputs">
             <CustomInput
               type="text"
               label="Task title"
@@ -51,23 +58,29 @@ const EditTaskPage = () => {
             />
             {errors.description && <TextError error={errors.description} />}
 
-            <label>
-              Completed:
+            <label className="status-checkbox-label">
+              Done:
               <input
                 type="checkbox"
                 checked={values.done}
                 onChange={(e) => setFieldValue("done", e.target.checked)}
               />
             </label>
-
+          </div>
+          <div className="attachments">
             <TaskAttachments
-              attachments={files}
-              addAttachment={addFile}
+              attachments={
+                currentTask && Array.isArray(currentTask.files)
+                  ? (currentTask.files.filter(
+                      (f) => typeof f === "string"
+                    ) as string[])
+                  : []
+              }
               removeAttachment={removeFile}
+              addAttachment={addFile}
             />
           </div>
-
-          <div className="add-task-form-button">
+          <div className="save-task-form-button">
             <CustomButton
               type="submit"
               text={isSubmitting || loading ? "Saving..." : "Save"}

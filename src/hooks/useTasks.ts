@@ -50,7 +50,7 @@ const useTasks = () => {
     files: (File | string)[],
     done: boolean,
     oldFiles: string[],
-    onSucsess?: () => void
+    onSuccess?: () => void
   ) => {
     dispatch(
       updateTaskAsyncAction({
@@ -60,7 +60,7 @@ const useTasks = () => {
         files,
         done,
         oldFiles,
-        onSucsess,
+        onSuccess,
       })
     );
   };

@@ -51,29 +51,29 @@ const useEditTask = () => {
     );
   };
 
-  const handleSubmit = (values: {
+  const handleSubmit = async (values: {
     _id: string;
     title: string;
     description: string;
-    files: (File | string)[];
     done: boolean;
+    files: (File | string)[];
     oldFiles: string[];
-    onSucsess?: () => void;
   }) => {
     if (!id) return;
-    console.log(values, "==========");
-    updateTask(
-      values._id,
-      values.title,
-      values.description,
-      values.files,
-      values.done,
-      values.oldFiles,
-      () => {
-        navigate("/tasks");
-        values.onSucsess?.();
-      }
-    );
+    return new Promise<void>((resolve) => {
+      updateTask(
+        values._id,
+        values.title,
+        values.description,
+        [],
+        values.done,
+        values.oldFiles,
+        () => {
+          navigate("/tasks");
+          resolve();
+        }
+      );
+    });
   };
 
   const handleDeleteClick = () => {

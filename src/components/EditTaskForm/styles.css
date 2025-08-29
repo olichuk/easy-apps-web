@@ -1,9 +1,10 @@
-.add-task-form-container {
+.edit-task-form-container {
   display: flex;
   flex-direction: column;
+  background-color: var(--lightGray);
 }
 
-.add-task-form-inputs {
+.edit-task-form-inputs {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,17 +13,33 @@
   margin-bottom: 70px;
 }
 
-.add-task-form-inputs .custom-input {
+.edit-task-form-inputs .custom-input {
   background-color: var(--lightGray);
   border-color: var(--darkGray);
   color: var(--black);
   width: 276px;
 }
-.add-task-form-inputs .custom-input-label {
+.edit-task-form-inputs .custom-input-label {
   color: var(--darkGray);
 }
-.add-task-form-button {
+.save-task-form-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
+}
+.delete-task-form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-checkbox-label {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 276px;
+  font-size: 14px;
+  color: var(--darkGray);
+  margin-bottom: 0;
 }

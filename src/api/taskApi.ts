@@ -61,7 +61,7 @@ export const editTaskApi = async (
 
   console.log("files to be uploaded: ", files);
 
-  if (files) {
+  if (files && files.length) {
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
