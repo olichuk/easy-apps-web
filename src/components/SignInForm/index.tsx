@@ -17,8 +17,8 @@ const SignInForm = () => {
   return (
     <Formik
       initialValues={{
-        email: "",
-        password: "",
+        email: "Password123@gmail.com",
+        password: "Password123@",
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {

@@ -1,0 +1,8 @@
+.edit-task-page {
+  background-color: var(--lightGray);
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}

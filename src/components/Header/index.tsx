@@ -7,14 +7,17 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TRootState } from "../../store/index";
 
+
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+
   const taskCounter = useSelector(
     (state: TRootState) => state.tasks.tasks.length
   );
+  
   const formatTaskCounter = (count: number) => {
     return count === 1 ? `${count} task` : `${count} tasks`;
   };
@@ -30,11 +33,15 @@ const Header = () => {
         return "";
     }
   };
+
+  const isEditTaskPage = id && currentPath === `/task/edit/${id}`;
+
   return (
-    <header className={`header ${getHeaderClass()}`}>
-      <Link to="/tasks" className="logo-link">
-        <img src={Logo} alt="Logo" className="logo" />
-      </Link>
+    
+    <header className={`header ${getHeaderClass()} ${isEditTaskPage ? "edit-task" : ""}`}>
+        <Link to="/tasks" className="logo-link">
+          <img src={Logo} alt="Logo" className="logo" />
+        </Link>
       <div className="title-container">
         {currentPath === "/tasks" && (
           <div className="header-title-container">
@@ -65,15 +72,18 @@ const Header = () => {
         {id && currentPath === `/task/${id}` && (
           <h1 className="header-title">Task Details</h1>
         )}
+        {id && currentPath === `/task/edit/${id}` && (
+          <h1 className="header-title">Edit Tasks</h1>
+        )}
       </div>
-      <div className="buttons-container">
-        <CustomButton text="Tasks" onClick={() => navigate("/tasks")} />
-        <CustomButton text="Profile" onClick={() => navigate("/profile")} />
-        <CustomButton
-          text="Common Tasks"
-          onClick={() => navigate("/common-tasks")}
-        />
-      </div>
+        <div className="buttons-container">
+          <CustomButton text="Tasks" onClick={() => navigate("/tasks")} />
+          <CustomButton text="Profile" onClick={() => navigate("/profile")} />
+          <CustomButton
+            text="Common Tasks"
+            onClick={() => navigate("/common-tasks")}
+          />
+        </div>
     </header>
   );
 };

@@ -7,6 +7,15 @@
   align-items: center;
 }
 
+.header.edit-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 145px;
+  padding: 0 20px;
+}
+
 .header-tasks {
   height: 148px;
 }
@@ -91,6 +100,11 @@
 }
 
 @media screen and (min-width: 992px) {
+  .header.edit-task {
+    justify-content: space-between;
+    height: 145px;
+    border-radius: 0 0 28px 28px;
+  }
   .header {
     justify-content: space-between;
     height: 145px;

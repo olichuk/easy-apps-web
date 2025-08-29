@@ -22,7 +22,7 @@ const AddTaskForm = () => {
   );
 
   const removeAttachment = React.useCallback(
-    (attachmentToDelete: File) => {
+    (attachmentToDelete: File | string) => {
       setAttachments(
         attachments.filter((attachment) => attachment !== attachmentToDelete)
       );

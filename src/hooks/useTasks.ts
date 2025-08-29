@@ -5,6 +5,7 @@ import {
   deleteTaskAsyncAction,
   getTaskByIdAsyncAction,
   getTasksAsyncAction,
+  updateTaskAsyncAction,
 } from "../store/asyncActions/tasksAsyncActions";
 import { TRootState, TAppDispatch } from "../store";
 import { Task } from "../interfaces/tasks";
@@ -41,6 +42,29 @@ const useTasks = () => {
   const getTaskById = (id: string) => {
     dispatch(getTaskByIdAsyncAction(id));
   };
+
+  const updateTask = (
+    id: string,
+    title: string,
+    description: string,
+    files: (File | string)[],
+    done: boolean,
+    oldFiles: string[],
+    onSuccess?: () => void
+  ) => {
+    dispatch(
+      updateTaskAsyncAction({
+        id,
+        title,
+        description,
+        files,
+        done,
+        oldFiles,
+        onSuccess,
+      })
+    );
+  };
+
   const changeTaskStatus = (_id: string, done: boolean) => {
     dispatch(changeTaskStatusAsyncAction({ _id, done }));
   };
@@ -53,6 +77,7 @@ const useTasks = () => {
     deleteTask,
     createTask,
     getTaskById,
+    updateTask,
     changeTaskStatus,
   };
 };

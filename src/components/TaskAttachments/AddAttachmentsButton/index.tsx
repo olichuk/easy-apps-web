@@ -12,10 +12,10 @@ const AddAttachmentButton = ({ addAttachment }: IProps) => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      addAttachment(file);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      filesArray.forEach(file => addAttachment(file));
     }
   };
 
@@ -28,6 +28,7 @@ const AddAttachmentButton = ({ addAttachment }: IProps) => {
       </button>
       <input
         type="file"
+        multiple
         accept="image/*"
         style={{ display: "none" }}
         ref={fileInputRef}

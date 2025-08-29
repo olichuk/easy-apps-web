@@ -4,7 +4,7 @@ import "./styles.css";
 import TasksAttachmentsItem from "./TaskAttachmentsItem";
 
 interface IProps {
-  attachments: File[];
+  attachments: (File | string)[];
   addAttachment: (attachment: File) => void;
   removeAttachment: (attachmentToDelete: File) => void;
 }
@@ -14,6 +14,8 @@ const TaskAttachments = ({
   addAttachment,
   removeAttachment,
 }: IProps) => {
+  console.log("attachments: ", attachments);
+
   return (
     <div className="attachments-container">
       <div className="attachments-horizontal-container">

@@ -1,9 +1,28 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useTasks from "../../hooks/useTasks";
+import EditTaskForm from "../../components/EditTaskForm";
 import React from "react";
+import "./styles.css";
+
 const TaskEditorPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const { currentTask, loading, error, getTaskById } = useTasks();
+
+  useEffect(() => void (id && getTaskById(id)), [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!currentTask) return <div>No task found</div>;
+
   return (
-    <div>
-      <p>Task Editor Page</p>
+    <div className="edit-task-page">
+      <EditTaskForm />
     </div>
   );
+  <div className="edit-task-page">
+    <EditTaskForm />;
+  </div>;
 };
+
 export default TaskEditorPage;

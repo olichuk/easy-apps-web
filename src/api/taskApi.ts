@@ -46,3 +46,36 @@ export const changeTaskStatusApi = (id: string, done: boolean) => {
     },
   });
 };
+
+export const editTaskApi = async (
+  id: string,
+  title: string,
+  description: string,
+  files?: (File | string)[],
+  done?: boolean
+) => {
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("done", String(done));
+
+  console.log("files to be uploaded: ", files);
+
+  if (files && files.length) {
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+  }
+
+  console.log("FormData entries:", files);
+
+  const response = await axiosInstance.put(`/tasks/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" } as const,
+  });
+
+  return response;
+};
+
+export const deleteFileApi = (id: string, url: string) => {
+  return axiosInstance.put(`/tasks/${id}/files`, { url });
+};
